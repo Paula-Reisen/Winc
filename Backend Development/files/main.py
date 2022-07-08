@@ -22,7 +22,7 @@ def cache_zip(zip_file_path, cache_dir_path):
 
 def cached_files():
     list = []
-    path = os.scandir(os.path.abspath('cache'))
+    path = os.scandir(os.path.abspath())
     for entry in path:
         list.append(entry.path)
     return list
@@ -38,8 +38,8 @@ def find_password(list):
 
 
 if __name__ == "__main__":
-    Zippath = 'D:\\Winc\\Backend Development\\files'
-    Cachepath = 'cache'
-    cache_zip(Zippath + '\\data.zip', Cachepath)
-    find_password(cached_files())
-
+    pass
+    # Zippath = 'D:\\Winc\\Backend Development\\files'
+    # Cachepath = 'cache'
+    # cache_zip(Zippath + '\\data.zip', Cachepath)
+    # find_password(cached_files())
