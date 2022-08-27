@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+{% block content %}
+{% for user in users %}
+<p>you are logged in as {{ user.username|e }}</p>
+{% endblock content %}
+

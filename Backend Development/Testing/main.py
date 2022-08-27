@@ -1,12 +1,16 @@
-def Get_none():
-    return None
+from urllib import response
+from flask import Flask, render_template, redirect, url_for
 
-def flatten_dict(dict):
-    listdict = []
-    listdict.append(dict)
-    dict = listdict
-    return dict
+__winc_id__ = "9263bbfddbeb4a0397de231a1e33240a"
+__human_name__ = "templates"
 
-Get_none()
+app = Flask(__name__)
 
-flatten_dict({'a': {'inner_a': 42, 'inner_b': 350}, 'b': 3.14})
+
+@app.route("/")
+def index():
+    return render_template("index.html")
+
+@app.route("/home")
+def redirecting():
+    response = client.get
