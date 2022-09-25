@@ -1,6 +1,6 @@
 import pandas
 import os
-from Handle_Date import handle_date
+from handle_date import handle_date
 
 
 def export(selection, date):
@@ -33,8 +33,8 @@ def export(selection, date):
         if os.path.isfile("df_bought.csv") == False:
             print("There is no data in the bought administration")
         elif os.path.isfile("df_inventory.csv"):
-            df_bought = pd.read_csv("df_bought.csv")
-            df_bought["Buy_date"] = pd.to_datetime(df_bought["Buy_date"])
+            df_bought = pandas.read_csv("df_bought.csv")
+            df_bought["Buy_date"] = pandas.to_datetime(df_bought["Buy_date"])
             # create new column comparing the input date to the Buy_date
             df_bought["Bought"] = df_bought["Buy_date"] <= date
             # select Bought products only
@@ -50,8 +50,8 @@ def export(selection, date):
         if os.path.isfile("df_sold.csv") == False:
             print("There is no data in the sold administration")
         elif os.path.isfile("df_sold.csv"):
-            df_sold = pd.read_csv("df_sold.csv")
-            df_sold["Sell_date"] = pd.to_datetime(df_sold["Sell_date"])
+            df_sold = pandas.read_csv("df_sold.csv")
+            df_sold["Sell_date"] = pandas.to_datetime(df_sold["Sell_date"])
             # create new column comparing the input date to the Sell_date
             df_sold["Sold"] = df_sold["Sell_date"] <= date
             # select Sold products only

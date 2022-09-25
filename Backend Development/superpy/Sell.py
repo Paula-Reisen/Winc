@@ -1,4 +1,4 @@
-from Handle_Date import handle_date
+from handle_date import handle_date
 from record_sell import record_sell
 import os
 import pandas as pd
@@ -12,11 +12,11 @@ def add_sell_to_inventory(product, price, sell_date, quantity):
         (print(+"This is the incorrect date string format. It should be YYYY-MM-DD"))
         return
     # check if inventory already exists
-    if os.path.isfile("Inventory.csv") == False:
+    if os.path.isfile("df_inventory.csv") == False:
         print("There is nothing in the current inventory")
     # check if item with Product_name is present in inventory and if quantity is enough
-    elif os.path.isfile("Inventory.csv"):
-        Inventory = pd.read_csv("Inventory.csv")
+    elif os.path.isfile("df_inventory.csv"):
+        Inventory = pd.read_csv("df_inventory.csv")
         Inventory["Quantity"] = pd.to_numeric(Inventory["Quantity"])
         product_exists = (
             (Inventory["Product_name"] == product)
@@ -52,10 +52,10 @@ def add_sell_to_inventory(product, price, sell_date, quantity):
                         Inventory.index[product_index])
                     print("Updated inventory:")
                     print(Inventory.to_string(index=False))
-                    return Inventory.to_csv("Inventory.csv", index=False)
+                    return Inventory.to_csv("df_inventory.csv", index=False)
                 else:
                     # update quantity
                     Inventory["Quantity"].iloc[product_index] = new_quantity
                     print("Updated inventory:")
                     print(Inventory.to_string(index=False))
-                    return Inventory.to_csv("Inventory.csv", index=False)
+                    return Inventory.to_csv("df_inventory.csv", index=False)
