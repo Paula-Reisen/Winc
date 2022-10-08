@@ -36,10 +36,10 @@ def add_buy_to_inventory(id, product, price, quantity, buy_date, exp_date):
         print(Inventory.to_string(index=False))
         # add item to list of bought items
         record_buy(id, product, price, buy_date, quantity, exp_date)
-        return Inventory.to_csv("df_inventory.csv", index=False)
+        return Inventory.to_csv("inventory.csv", index=False)
     # if inventory already exists, search product with same Product_name, Expiration_date
-    elif os.path.isfile("df_inventory.csv"):
-        Inventory = pd.read_csv("df_inventory.csv")
+    elif os.path.isfile("inventory.csv"):
+        Inventory = pd.read_csv("inventory.csv")
         product_exists = (
             (Inventory["Product_name"] == product)
             & ((Inventory["Expiration_date"] == exp_date))
@@ -60,7 +60,7 @@ def add_buy_to_inventory(id, product, price, quantity, buy_date, exp_date):
             print(Inventory.to_string(index=False))
             # add item to list of bought items
             record_buy(id, product, price, buy_date, quantity, exp_date)
-            return Inventory.to_csv("df_inventory.csv", index=False)
+            return Inventory.to_csv("inventory.csv", index=False)
         # if product already exists, get the product_index and update the Quantity
         elif product_exists:
             product_index = Inventory[

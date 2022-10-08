@@ -3,7 +3,7 @@ import os
 
 
 def plot_data(input):
-    data = pandas.read_csv("df_" + input + ".csv")
+    data = pandas.read_csv(input + ".csv")
     plot = data.plot.bar(
         x="Product_name",
         y="Quantity",

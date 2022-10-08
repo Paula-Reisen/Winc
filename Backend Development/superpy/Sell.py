@@ -12,11 +12,11 @@ def add_sell_to_inventory(product, price, sell_date, quantity):
         (print(+"This is the incorrect date string format. It should be YYYY-MM-DD"))
         return
     # check if inventory already exists
-    if os.path.isfile("df_inventory.csv") == False:
+    if os.path.isfile("inventory.csv") == False:
         print("There is nothing in the current inventory")
     # check if item with Product_name is present in inventory and if quantity is enough
-    elif os.path.isfile("df_inventory.csv"):
-        Inventory = pd.read_csv("df_inventory.csv")
+    elif os.path.isfile("inventory.csv"):
+        Inventory = pd.read_csv("inventory.csv")
         Inventory["Quantity"] = pd.to_numeric(Inventory["Quantity"])
         product_exists = (
             (Inventory["Product_name"] == product)

@@ -4,7 +4,7 @@ import os
 
 def record_buy(id, product, price, buy_date, quantity, exp_date):
     # check if record of bought items already exists and if not create file
-    if os.path.isfile("df_bought.csv") == False:
+    if os.path.isfile("bought.csv") == False:
         Bought = pandas.DataFrame(
             columns=[
                 "Product_ID",

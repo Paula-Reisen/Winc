@@ -11,55 +11,55 @@ def export(selection, date):
     elif handle_date(date) == True:
         date = pandas.to_datetime(date)
     if selection == "expired":
-        if os.path.isfile("df_inventory.csv") == False:
+        if os.path.isfile("inventory.csv") == False:
             print("There is no data in the current inventory")
         # create new column comparing the input date to the Expiration_date
-        elif os.path.isfile("df_inventory.csv"):
-            df_inventory = pandas.read_csv("df_inventory.csv")
-            df_inventory["Expiration_date"] = pandas.to_datetime(
-                df_inventory["Expiration_date"], format="%Y-%m-%d"
+        elif os.path.isfile("inventory.csv"):
+            inventory = pandas.read_csv("inventory.csv")
+            inventory["Expiration_date"] = pandas.to_datetime(
+                inventory["Expiration_date"], format="%Y-%m-%d"
             )
-            df_inventory["Expired"] = df_inventory["Expiration_date"] < date
+            inventory["Expired"] = inventory["Expiration_date"] < date
             # select Expired products only
-            df_inventory_selection = df_inventory[df_inventory["Expired"] == True]
-            if df_inventory_selection.empty:
+            inventory_selection = inventory[inventory["Expired"] == True]
+            if inventory_selection.empty:
                 print("There are no expired products at this date")
             else:
                 print("Expired products on selected date:")
-                print(df_inventory_selection.to_string(index=False))
+                print(inventory_selection.to_string(index=False))
                 print("Data is exported to Expired.csv")
-                return df_inventory_selection.to_csv("Expired.csv", index=False)
+                return inventory_selection.to_csv("Expired.csv", index=False)
     if selection == "bought":
-        if os.path.isfile("df_bought.csv") == False:
+        if os.path.isfile("bought.csv") == False:
             print("There is no data in the bought administration")
-        elif os.path.isfile("df_inventory.csv"):
-            df_bought = pandas.read_csv("df_bought.csv")
-            df_bought["Buy_date"] = pandas.to_datetime(df_bought["Buy_date"])
+        elif os.path.isfile("inventory.csv"):
+            bought = pandas.read_csv("bought.csv")
+            bought["Buy_date"] = pandas.to_datetime(bought["Buy_date"])
             # create new column comparing the input date to the Buy_date
-            df_bought["Bought"] = df_bought["Buy_date"] <= date
+            bought["Bought"] = bought["Buy_date"] <= date
             # select Bought products only
-            df_bought_selection = df_bought[df_bought["Bought"] == True]
-            if df_bought_selection.empty:
+            bought_selection = bought[bought["Bought"] == True]
+            if bought_selection.empty:
                 print("No bought products before or on this date")
             else:
                 print("Bought products on selected date:")
-                print(df_bought_selection.to_string(index=False))
+                print(bought_selection.to_string(index=False))
                 print("Data is exported to Bought.csv")
-                return df_bought_selection.to_csv("Bought.csv", index=False)
+                return bought_selection.to_csv("Bought.csv", index=False)
     if selection == "sold":
-        if os.path.isfile("df_sold.csv") == False:
+        if os.path.isfile("sold.csv") == False:
             print("There is no data in the sold administration")
-        elif os.path.isfile("df_sold.csv"):
-            df_sold = pandas.read_csv("df_sold.csv")
-            df_sold["Sell_date"] = pandas.to_datetime(df_sold["Sell_date"])
+        elif os.path.isfile("sold.csv"):
+            sold = pandas.read_csv("sold.csv")
+            sold["Sell_date"] = pandas.to_datetime(sold["Sell_date"])
             # create new column comparing the input date to the Sell_date
-            df_sold["Sold"] = df_sold["Sell_date"] <= date
+            sold["Sold"] = sold["Sell_date"] <= date
             # select Sold products only
-            df_sold_selection = df_sold[df_sold["Sold"] == True]
-            if df_sold_selection.empty:
+            sold_selection = sold[sold["Sold"] == True]
+            if sold_selection.empty:
                 print("No sold products before or on this date")
             else:
                 print("Sold products on selected date:")
-                print(df_sold_selection.to_string(index=False))
+                print(sold_selection.to_string(index=False))
                 print("Data is exported to Sold.csv")
-                return df_sold_selection.to_csv("Bought.csv", index=False)
+                return sold_selection.to_csv("Bought.csv", index=False)

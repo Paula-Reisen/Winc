@@ -5,8 +5,9 @@ import os
 
 def record_sell(id, product, price, sell_date, quantity):
     # check if record of sold items already exists and if not create file
-    if os.path.isfile("df_sold.csv") == False:
-        df_sold = pandas.DataFrame(
+    if os.path.isfile("sold.csv") == False:
+
+        sold = pandas.DataFrame(
             columns=[
                 "Product_ID",
                 "Product_name",
@@ -23,11 +24,13 @@ def record_sell(id, product, price, sell_date, quantity):
             "Sell_date": sell_date,
             "Quantity": quantity,
         }
-        df_sold = df_sold.append(new_row, ignore_index=True)
+
+        sold = sold.append(new_row, ignore_index=True)
         print(product + " was added to SELL administration")
-        return df_sold.to_csv("df_sold.csv", index=False)
-    elif os.path.isfile("df_sold.csv"):
-        df_sold = pandas.read_csv("df_sold.csv")
+        return sold.to_csv("sold.csv", index=False)
+    elif os.path.isfile("sold.csv"):
+
+        sold = pandas.read_csv("sold.csv")
         # create new item and append to existing file
         new_row = {
             "Product_ID": id,
@@ -36,6 +39,7 @@ def record_sell(id, product, price, sell_date, quantity):
             "Sell_date": sell_date,
             "Quantity": quantity,
         }
-        df_sold = df_sold.append(new_row, ignore_index=True)
+
+        sold = sold.append(new_row, ignore_index=True)
         print(product + " was added to SELL administration")
-        return df_sold.to_csv("df_sold.csv", index=False)
+        return sold.to_csv("sold.csv", index=False)

@@ -14,41 +14,41 @@ def calculate_profit(input_date):
     elif handle_date(input_date) == True:
         input_date = pd.to_datetime(input_date)
     # check if anything was sold
-    if os.path.isfile("df_sold.csv") == False:
+    if os.path.isfile("sold.csv") == False:
         print("There is nothing sold yet")
-    if os.path.isfile("df_bought.csv") == False:
+    if os.path.isfile("bought.csv") == False:
         print("There is nothing bought yet")
-    elif os.path.isfile("df_sold.csv") & os.path.isfile("df_bought.csv"):
-        df_sold = pd.read_csv("df_sold.csv")
-        df_bought = pd.read_csv("df_bought.csv")
+    elif os.path.isfile("sold.csv") & os.path.isfile("bought.csv"):
+        sold = pd.read_csv("sold.csv")
+        bought = pd.read_csv("bought.csv")
 
         # check which items are bought before or at this input date
-        df_bought["Buy_date"] = pd.to_datetime(df_bought["Buy_date"])
-        df_bought["Bought"] = input_date >= df_bought["Buy_date"]
-        df_bought_true = df_bought[df_bought["Bought"] == True]
+        bought["Buy_date"] = pd.to_datetime(bought["Buy_date"])
+        bought["Bought"] = input_date >= bought["Buy_date"]
+        bought_true = bought[bought["Bought"] == True]
 
         # check which items are sold before or at this input date
-        df_sold["Sell_date"] = pd.to_datetime(df_sold["Sell_date"])
-        df_sold["Sold"] = input_date >= df_sold["Sell_date"]
-        df_sold_true = df_sold[df_sold["Sold"] == True]
+        sold["Sell_date"] = pd.to_datetime(sold["Sell_date"])
+        sold["Sold"] = input_date >= sold["Sell_date"]
+        sold_true = sold[sold["Sold"] == True]
 
         # calculate costs of bought products
-        df_bought_true["Buy_price"] = pd.to_numeric(
-            df_bought_true["Buy_price"])
-        df_bought_true["Quantity"] = pd.to_numeric(df_bought_true["Quantity"])
-        df_bought_true["Costs"] = (
-            df_bought_true["Quantity"] * df_bought_true["Buy_price"]
+        bought_true["Buy_price"] = pd.to_numeric(
+            bought_true["Buy_price"])
+        bought_true["Quantity"] = pd.to_numeric(bought_true["Quantity"])
+        bought_true["Costs"] = (
+            bought_true["Quantity"] * bought_true["Buy_price"]
         )
 
         # calculate benefits of sold products
-        df_sold_true["Sell_price"] = pd.to_numeric(df_sold_true["Sell_price"])
-        df_sold_true["Quantity"] = pd.to_numeric(df_sold_true["Quantity"])
-        df_sold_true["Benefit"] = df_sold_true["Quantity"] * \
-            df_sold_true["Sell_price"]
+        sold_true["Sell_price"] = pd.to_numeric(sold_true["Sell_price"])
+        sold_true["Quantity"] = pd.to_numeric(sold_true["Quantity"])
+        sold_true["Benefit"] = sold_true["Quantity"] * \
+            sold_true["Sell_price"]
 
         # calculate profit
-        total_costs = df_bought_true["Costs"].sum()
-        total_benefit = df_sold_true["Benefit"].sum()
+        total_costs = bought_true["Costs"].sum()
+        total_benefit = sold_true["Benefit"].sum()
         total_profit = total_benefit - total_costs
         date = input_date.strftime("%Y-%m-%d")
 
@@ -58,9 +58,9 @@ def calculate_profit(input_date):
             print("No products bought before or on:" + " " + date)
         else:
             print("Products bought before or on:" + " " + date)
-            print(df_bought_true)
+            print(bought_true)
             print("Products sold before or on:" + " " + date)
-            print(df_sold_true)
+            print(sold_true)
             print("Total costs:" + str(total_costs))
             print("Total benefit:" + str(total_benefit))
             print("Total profit:" + str(total_profit))
