@@ -1,4 +1,3 @@
-from xml.etree.ElementTree import tostring
 from handle_date import handle_date
 from record_sell import record_sell
 import os

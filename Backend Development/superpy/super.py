@@ -7,7 +7,6 @@ from Sell import add_sell_to_inventory
 from plot import plot_data
 import calculateProfit
 from reset_files import reset_files
-import pandas as pd
 
 # Do not change these lines.
 __winc_id__ = "a2bc36ea784242e4989deb157d527ba0"
