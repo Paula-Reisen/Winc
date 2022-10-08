@@ -52,10 +52,10 @@ def add_sell_to_inventory(product, price, sell_date, quantity):
                         Inventory.index[product_index])
                     print("Updated inventory:")
                     print(Inventory.to_string(index=False))
-                    return Inventory.to_csv("df_inventory.csv", index=False)
+                    return Inventory.to_csv("inventory.csv", index=False)
                 else:
                     # update quantity
                     Inventory["Quantity"].iloc[product_index] = new_quantity
                     print("Updated inventory:")
                     print(Inventory.to_string(index=False))
-                    return Inventory.to_csv("df_inventory.csv", index=False)
+                    return Inventory.to_csv("inventory.csv", index=False)
