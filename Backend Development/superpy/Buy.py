@@ -1,4 +1,5 @@
 import pandas as pd
+import datetime
 from handle_date import handle_date
 from record_buy import record_buy
 import os
@@ -7,6 +8,20 @@ pd.options.mode.chained_assignment = None  # default='warn'
 
 
 def add_buy_to_inventory(id, product, price, quantity, buy_date, exp_date):
+#check if buy_date is filled otherwise get the time from advanced or fill in the current date of today
+    if buy_date == None:
+        if os.path.isfile("advanced_date_save.csv") == False:
+            today = datetime.datetime.now()
+            buy_date = today.date()
+            buy_date = str(buy_date)
+        else:
+            Current_date = pd.read_csv("advanced_date_save.csv")
+            print(Current_date)
+
+            buy_date = pd.to_datetime(
+                Current_date["date"].iloc[0], format="%Y-%m-%d").date()
+            buy_date = str(buy_date)
+            print(buy_date)
     # check if exp_date and buy_date are of the YYYY-MM-DD format
     if (handle_date(exp_date) == False) | (handle_date(buy_date) == False):
         print("This is the incorrect date string format. It should be YYYY-MM-DD")

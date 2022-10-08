@@ -1,3 +1,4 @@
 Product_ID,Product_name,Quantity,Expiration_date
 1,egg,3,2022-10-10
-2,yoghurt,2,2022-10-10
+2,yoghurt,1,2022-10-10
+3,pepsi,2,2022-10-10

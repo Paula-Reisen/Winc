@@ -81,7 +81,7 @@ def main():
     buy_parser.add_argument(
         "--quantity", type=int, dest="quantity", help="quantity of product", default=1)
     buy_parser.add_argument("--buy-date", type=str, dest="buy_date",
-                            help="product buy date (format YYYY-MM-DD)", required=True)
+                            help="product buy date (format YYYY-MM-DD)")
     buy_parser.add_argument("--exp-date", type=str, dest="exp_date",
                             help="product expiration date (format YYYY-MM-DD)", required=True)
     # Sell products. Required arguments are productname, price, sell-date.
@@ -93,7 +93,7 @@ def main():
     sell_parser.add_argument(
         "--quantity", type=int, dest="quantity", help="quantity of product", default=1)
     sell_parser.add_argument("--sell-date", type=str, dest="sell_date",
-                             help="product sell date (format YYYY-MM-DD)", required=True)
+                             help="product sell date (format YYYY-MM-DD)")
 
     # Export of inventory. Required filename and date you want the products in the inventory
     export_parser = subparsers.add_parser(

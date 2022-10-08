@@ -1,12 +1,28 @@
+from xml.etree.ElementTree import tostring
 from handle_date import handle_date
 from record_sell import record_sell
 import os
 import pandas as pd
+import datetime
 
 pd.options.mode.chained_assignment = None  # default='warn'
 
 
 def add_sell_to_inventory(product, price, sell_date, quantity):
+    # check if sell_date is filled otherwise get the time from advanced or fill in the current date of today
+    if sell_date == None:
+        if os.path.isfile("advanced_date_save.csv") == False:
+            today = datetime.datetime.now()
+            sell_date = today.date()
+            sell_date = str(sell_date)
+        else:
+            Current_date = pd.read_csv("advanced_date_save.csv")
+            print(Current_date)
+
+            sell_date = pd.to_datetime(
+                Current_date["date"].iloc[0], format="%Y-%m-%d").date()
+            sell_date = str(sell_date)
+            print(sell_date)
     # check if sell_date is of the YYYY-MM-DD format
     if handle_date(sell_date) == False:
         (print(+"This is the incorrect date string format. It should be YYYY-MM-DD"))
