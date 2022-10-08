@@ -1,2 +1,0 @@
-def resetFilesForNextUse(): 
-    print
